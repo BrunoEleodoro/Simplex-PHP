@@ -1,91 +1,59 @@
-<?php
-
-    function gerar_nlp($elemento_pivo,$vet,$qtd_colunas,$linha_menor_valor)
-    {
-        $nlp = array();
-        $i = 0;
-        while($i < $qtd_colunas)
-        { 
-            $res = "";
-            if($elemento_pivo == 0)
-            {
-                $res = $vet[$linha_menor_valor][$i];
-            }
-            else
-            {
-                $res = $vet[$linha_menor_valor][$i] / $elemento_pivo;
-            }
-            $nlp[$i] = $res;
-            $i++;
-        }
-        return $nlp;
-    }
-
-    function resolver($qtd_colunas, $qtd_linhas, $vet)
-    {
-        $vet_novo = array();
+$vet_novo = array();
         $index = array_search(min($vet[0]), $vet[0]);
-        $coluna = array_search(min($vet[0]), $vet[0]);
-    
+        
+        //$index2 = array_search(min($vet[0]), $vet[0]);
+        //echo "index2=$index2<br>";
+
         $i = 1;
         
         $menor_valor = 0;
-        $linha_menor_valor = 0;
+        $index_menor_valor = 0;
         $elemento_pivo = 0;
-        //$coluna = 0;
+
         while($i < $qtd_linhas)
         {
             $b = $vet[$i][count($vet[0]) - 1];
             $res = 0;
-            $elemento = $vet[$i][$index];
-            if($elemento < 0)
+            if($vet[$i][$index] == 0)
             {
-                $elemento = 0.0000000000125;
-            }
-            if($elemento == 0)
-            {
-                $res = $elemento;
+                $res = $vet[$i][$index];
             }
             else
             {
-                $res = $b / $elemento;
-                
+                $res = $b / $vet[$i][$index];
+
             }
+
+            
 
             if($menor_valor == 0)
             {
                 $menor_valor = $res;
             }
-            if($res < $menor_valor && $res > 0)
+            if($res < $menor_valor)
             {
-                
                 $menor_valor = $res;
-                $linha_menor_valor = $i;
-                $coluna = $index;
+                $index_menor_valor = $i;
             }
-
-            
-            //echo number_format($res,3,",",".")."<br>";
-            
+            echo number_format($res,3)."<br>";
             $i++;
         }
-        if($linha_menor_valor == 0)
+        if($index_menor_valor == 0)
         {
-            $linha_menor_valor = 1;
+            $index_menor_valor = 1;
         }
         
         echo "menor_valor=$menor_valor<br>";
-        echo "linha_menor_valor=$linha_menor_valor<br>";
-        echo "coluna=$coluna<br>";
-        $elemento_pivo = $vet[$linha_menor_valor][$index];
+        echo "index_menor_valor=$index_menor_valor";
+        $elemento_pivo = $vet[$index_menor_valor][$index];
 
         echo "<br><br>---------------- SEGUNDA ETAPA ------------------<br><br>";
         
         $i = 0;
         while($i < $qtd_colunas)
         {
-            $res = $vet[$linha_menor_valor][$i];
-            echo number_format($res,3,",",".")." &nbsp&nbsp&nbsp&nbsp  ";
+            $res = $vet[$index_menor_valor][$i];
+            echo number_format($res,3)." &nbsp&nbsp&nbsp&nbsp  ";
             $i++;
         }
         echo "<br>";
@@ -96,14 +64,15 @@
             $res = "";
             if($elemento_pivo == 0)
             {
-                $res = $vet[$linha_menor_valor][$i];
+                $res = $vet[$index_menor_valor][$i];
             }
             else
             {
-                $res = $vet[$linha_menor_valor][$i] / $elemento_pivo;
+                $res = $vet[$index_menor_valor][$i] / $elemento_pivo;
             }
+            //echo $vet[$index_menor_valor][$i]." / ".$elemento_pivo."<br>";
             $nlp[$i] = $res;
-            echo number_format($res,3,",",".")." &nbsp&nbsp&nbsp&nbsp  ";
+            echo number_format($res,3)." &nbsp&nbsp&nbsp&nbsp  ";
             $i++;
         }
 
@@ -111,9 +80,9 @@
         $i = 0;
         while($i < $qtd_linhas)
         {
-            if($i != $linha_menor_valor)
+            if($i != $index_menor_valor)
             {
-                $res = $vet[$i][$linha_menor_valor] * -1;
+                $res = $vet[$i][$index_menor_valor] * -1;
                 echo "NUMEROS INVERTIDOS=".$res."<br>";
             }
             $i++;
@@ -122,23 +91,20 @@
         $i = 0;
         while($i < $qtd_linhas)
         {
-
-            if($i != $linha_menor_valor)
+            if($i != $index_menor_valor)
             {
-                
-                
+                $valor = $vet[$i][$index_menor_valor] * -1;
                 $k = 0;
-                $nlp = gerar_nlp($elemento_pivo, $vet, $qtd_colunas,$linha_menor_valor);
+                $nlp = gerar_nlp($elemento_pivo, $vet, $qtd_colunas,$index_menor_valor);
 
                 while($k < $qtd_colunas)
                 {
-                    $valor = $vet[$i][$coluna] * -1;
-
                     $res = $nlp[$k] * $valor;
-                    //echo $nlp[$k]." * $valor <br>";
                     $res2 = $res + $vet[$i][$k];
                     
                     $vet_novo[$i][$k] = $res2;
+                    //echo "$res2=$res + ".$vet[$i][$k]."&nbsp&nbsp&nbsp&nbsp";
+                    //echo number_format($res2,3)." &nbsp&nbsp&nbsp&nbsp  ";
                     $k++;
                 }
                 echo "<br>";
@@ -146,24 +112,26 @@
             else
             {
                 $k = 0;
-                $nlp = gerar_nlp($elemento_pivo, $vet, $qtd_colunas, $linha_menor_valor);
+                $nlp = gerar_nlp($elemento_pivo, $vet, $qtd_colunas, $index_menor_valor);
                 while($k < $qtd_colunas)
                 {
                     $res = $nlp[$k];
                     $vet_novo[$i][$k] = $res;
+                    //echo number_format($res,3)." &nbsp&nbsp&nbsp&nbsp  ";
                     $k++;
                 }
             }
             $i++;
         }
 
-       $i = 0;
+        $i = 0;
         while($i < $qtd_linhas)
         {
             $k = 0;
 
             while($k < $qtd_colunas)
             {
+                //echo $vet_novo[$k][$i]."<br>";
                 echo number_format($vet_novo[$i][$k],3)." &nbsp&nbsp&nbsp&nbsp  ";
                 $k++;
             }
@@ -174,8 +142,3 @@
         
         $i = 0;
         $k = 0;
-
-        return $vet_novo;
-    }
-
-?>

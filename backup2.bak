@@ -22,6 +22,19 @@
             <div class="container ">
                
                 
+              <!--
+                   
+                    <h3 class="col-md-2">
+                        2
+                    </h3>
+                    <h3 class="col-md-2">
+                        3
+                    </h3>
+                    <h3 class="col-md-2">
+                        4
+                    </h3>
+                </div>    
+                -->
                 <?php
                 
                 require_once("funcoes.php");
@@ -109,44 +122,45 @@
                             
                         }
                         
+                        //echo '<b>f'.$i.'x'.$k."</b>=".$valor."\n";
                         $k++;
                     }
                     echo "</div>";
+                    //$res = @$_GET["f".$i."res"];
+                    //echo '<b>f'.$i.'x'.$k."</b>=".$res."\n";
+        
+                    //echo "<br><br>";
+        
                     $i++;
                 }
-            
+                    
+
+//		echo "total=".count($vet);
+//		echo "total=".count($vet[0]);
+		
         $i = 0;
         
 		$qtd_linhas = count($vet);
         $qtd_colunas = count($vet[0]);
+        /*
+		while($i < $qtd_linhas)
+		{
+			$k = 0;
+			while($k < $qtd_colunas)
+			{
+				echo "vet[".$i."][".$k."]=".$vet[$i][$k]."<br>";
+				$k++;
+			}
+			echo "<br>";
+			$i++;
+        }
+        */
+		
+        //echo "menor valor de Z=".min($vet[0])."\n<br>";
+        
         echo "<br><br>---------------- PRIMEIRA ETAPA ------------------<br><br>";
         
-        $vet_novo = resolver($qtd_colunas, $qtd_linhas, $vet);
-        
-        while(min($vet_novo[0]) < 0)
-        {
-            $vet_novo = resolver($qtd_colunas, $qtd_linhas, $vet_novo);
-        }
-
-        //$vet_novo = resolver($qtd_colunas, $qtd_linhas, $vet_novo);
-	/*
-	$p = 0;
-	$limite = count($vet_novo[0]) - 1;
-	
-	while($p < $limite)
-	{
-		if($vet_novo[0][$p] < 0)
-		{
-	            $vet_novo = resolver($qtd_colunas, $qtd_linhas, $vet_novo);	
-			$p = 0;
-		}
-		$p++;
-	}
-	*/
-
-	
-         
-        
+        resolver($qtd_colunas, $qtd_linhas, $vet);
 
         echo "<br><br><br>";
 
@@ -158,7 +172,6 @@
 
         </div>
     </div>
-
 
     
 
