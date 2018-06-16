@@ -42,6 +42,7 @@
             {
                 $elemento = 0.0000000000125;
             }
+            
             if($elemento == 0)
             {
                 $res = $elemento;
@@ -75,13 +76,14 @@
         }
         
         echo "menor_valor=$menor_valor<br>";
-        echo "linha_menor_valor=$linha_menor_valor<br>";
-        echo "coluna=$coluna<br>";
+        echo "";
         $elemento_pivo = $vet[$linha_menor_valor][$index];
 
         echo "<br><br>---------------- SEGUNDA ETAPA ------------------<br><br>";
         
         $i = 0;
+        echo "<b>Linha Pivo:</b> &nbsp";
+        
         while($i < $qtd_colunas)
         {
             $res = $vet[$linha_menor_valor][$i];
@@ -89,6 +91,7 @@
             $i++;
         }
         echo "<br>";
+        echo "<b>Nova Linha Pivo:</b> &nbsp";
         $nlp = array();
         $i = 0;
         while($i < $qtd_colunas)
@@ -158,19 +161,19 @@
         }
 
        $i = 0;
-        while($i < $qtd_linhas)
-        {
-            $k = 0;
+       //echo "<b><u>Z:</u></b>&nbsp ";
+       
+       for ($i=0; $i < $qtd_linhas; $i++) 
+       { 
+           echo "<b><u>".($i+1)."ª</b></u> :";
+           for ($j=0; $j < $qtd_colunas; $j++) 
+           {     
+                echo number_format($vet_novo[$i][$j],3)." &nbsp&nbsp&nbsp&nbsp  ";
+           }
+           
+           echo "<br>";
+       }
 
-            while($k < $qtd_colunas)
-            {
-                echo number_format($vet_novo[$i][$k],3)." &nbsp&nbsp&nbsp&nbsp  ";
-                $k++;
-            }
-            echo "<br>";
-
-            $i++;
-        }
         
         $i = 0;
         $k = 0;

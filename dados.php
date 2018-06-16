@@ -5,13 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Simplex PT-3</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.png" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <style>
         body
         {
+            height: 100%;
             background-image: url('back.jpeg');
             background-size: cover;
+            background-repeat: no-repeat;
         }
     </style>
 </head>
@@ -127,22 +130,6 @@
         {
             $vet_novo = resolver($qtd_colunas, $qtd_linhas, $vet_novo);
         }
-
-        //$vet_novo = resolver($qtd_colunas, $qtd_linhas, $vet_novo);
-	/*
-	$p = 0;
-	$limite = count($vet_novo[0]) - 1;
-	
-	while($p < $limite)
-	{
-		if($vet_novo[0][$p] < 0)
-		{
-	            $vet_novo = resolver($qtd_colunas, $qtd_linhas, $vet_novo);	
-			$p = 0;
-		}
-		$p++;
-	}
-	*/
 
 	
          
